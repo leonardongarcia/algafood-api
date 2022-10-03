@@ -1,7 +1,7 @@
 package com.garcia.algafoodapi.api.v1.controller;
 
-import com.garcia.algafoodapi.api.v1.assembler.disassembler.EstadoInputDisassembler;
 import com.garcia.algafoodapi.api.v1.assembler.EstadoModelAssembler;
+import com.garcia.algafoodapi.api.v1.assembler.disassembler.EstadoInputDisassembler;
 import com.garcia.algafoodapi.api.v1.model.EstadoModel;
 import com.garcia.algafoodapi.api.v1.model.input.EstadoInput;
 import com.garcia.algafoodapi.api.v1.openapi.controller.EstadoControllerOpenApi;
@@ -56,7 +56,7 @@ public class EstadoController implements EstadoControllerOpenApi {
   @Transactional
   @PutMapping("/{estadoId}")
   public EstadoModel atualizar(
-          @PathVariable Long estadoId, @RequestBody @Valid EstadoInput estadoInput) {
+      @PathVariable Long estadoId, @RequestBody @Valid EstadoInput estadoInput) {
     Estado estadoAtual = cadastroEstadoService.buscarOuFalhar(estadoId);
 
     estadoInputDisassembler.copyToDomainObject(estadoInput, estadoAtual);

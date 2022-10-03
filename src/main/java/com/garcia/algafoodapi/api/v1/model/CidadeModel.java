@@ -11,11 +11,11 @@ import org.springframework.hateoas.server.core.Relation;
 @Setter
 public class CidadeModel extends RepresentationModel<CidadeModel> {
 
-    @Schema(example = "1")
-    private Long id;
+  @Schema(example = "1")
+  private Long id;
 
-    @Schema(example = "Uberlândia")
-    private String nome;
+  @Schema(example = "Uberlândia")
+  private String nome;
 
-    private EstadoModel estado;
+  private EstadoModel estado;
 }

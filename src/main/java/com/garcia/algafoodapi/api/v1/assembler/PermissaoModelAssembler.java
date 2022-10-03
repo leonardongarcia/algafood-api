@@ -12,32 +12,29 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PermissaoModelAssembler
-        implements RepresentationModelAssembler<Permissao, PermissaoModel> {
+    implements RepresentationModelAssembler<Permissao, PermissaoModel> {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    @Autowired
-    private AlgaLinks algaLinks;
+  @Autowired private AlgaLinks algaLinks;
 
-    @Autowired
-    private AlgaSecurity algaSecurity;
+  @Autowired private AlgaSecurity algaSecurity;
 
-    @Override
-    public PermissaoModel toModel(Permissao permissao) {
-        PermissaoModel permissaoModel = modelMapper.map(permissao, PermissaoModel.class);
-        return permissaoModel;
+  @Override
+  public PermissaoModel toModel(Permissao permissao) {
+    PermissaoModel permissaoModel = modelMapper.map(permissao, PermissaoModel.class);
+    return permissaoModel;
+  }
+
+  @Override
+  public CollectionModel<PermissaoModel> toCollectionModel(Iterable<? extends Permissao> entities) {
+    CollectionModel<PermissaoModel> collectionModel =
+        RepresentationModelAssembler.super.toCollectionModel(entities);
+
+    if (algaSecurity.podeConsultarUsuariosGruposPermissoes()) {
+      collectionModel.add(algaLinks.linkToPermissoes());
     }
 
-    @Override
-    public CollectionModel<PermissaoModel> toCollectionModel(Iterable<? extends Permissao> entities) {
-        CollectionModel<PermissaoModel> collectionModel
-                = RepresentationModelAssembler.super.toCollectionModel(entities);
-
-        if (algaSecurity.podeConsultarUsuariosGruposPermissoes()) {
-            collectionModel.add(algaLinks.linkToPermissoes());
-        }
-
-        return collectionModel;
-    }
+    return collectionModel;
+  }
 }

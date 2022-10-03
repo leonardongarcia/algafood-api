@@ -46,35 +46,36 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 
     OffsetDateTime dataUltimaAtualizacao = formaPagamentoRepository.getDataUltimaAtualizacao();
 
-    if(dataUltimaAtualizacao != null) {
+    if (dataUltimaAtualizacao != null) {
       etag = String.valueOf(dataUltimaAtualizacao.toEpochSecond());
     }
 
-    if(request.checkNotModified(etag)){
+    if (request.checkNotModified(etag)) {
       return null;
     }
 
     List<FormaPagamento> formasPagamento = cadastroFormaPagamentoService.listar();
-    CollectionModel<FormaPagamentoModel> formasPagamentoModel = formaPagamentoModelAssembler.toCollectionModel(formasPagamento);
+    CollectionModel<FormaPagamentoModel> formasPagamentoModel =
+        formaPagamentoModelAssembler.toCollectionModel(formasPagamento);
 
     return ResponseEntity.ok()
-            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
-            .eTag(etag)
-            .body(formasPagamentoModel);
+        .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+        .eTag(etag)
+        .body(formasPagamentoModel);
   }
 
   @CheckSecurity.FormasPagamento.PodeConsultar
   @Override
   @GetMapping("/{formaPagamentoId}")
-  public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formaPagamentoId,
-                                                    ServletWebRequest request) {
+  public ResponseEntity<FormaPagamentoModel> buscar(
+      @PathVariable Long formaPagamentoId, ServletWebRequest request) {
 
     ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
 
     String eTag = "0";
 
-    OffsetDateTime dataAtualizacao = formaPagamentoRepository
-            .getDataAtualizacaoById(formaPagamentoId);
+    OffsetDateTime dataAtualizacao =
+        formaPagamentoRepository.getDataAtualizacaoById(formaPagamentoId);
 
     if (dataAtualizacao != null) {
       eTag = String.valueOf(dataAtualizacao.toEpochSecond());
@@ -89,24 +90,26 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
     FormaPagamentoModel formaPagamentoModel = formaPagamentoModelAssembler.toModel(formaPagamento);
 
     return ResponseEntity.ok()
-            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
-            .eTag(eTag)
-            .body(formaPagamentoModel);
+        .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+        .eTag(eTag)
+        .body(formaPagamentoModel);
   }
 
-//  @GetMapping("/{formasPagamentoId}")
-//  public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formasPagamentoId) {
-//    FormaPagamento formaPagamento = cadastroFormaPagamentoService.buscarOuFalhar(formasPagamentoId);
-//    FormaPagamentoModel formaPagamentoModel = formaPagamentoModelAssembler.toModel(formaPagamento);
-//
-//    return ResponseEntity.ok()
-////            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
-////            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePrivate())
-//            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePublic())
-////            .cacheControl(CacheControl.noCache())
-////            .cacheControl(CacheControl.noStore())
-//            .body(formaPagamentoModel);
-//  }
+  //  @GetMapping("/{formasPagamentoId}")
+  //  public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formasPagamentoId) {
+  //    FormaPagamento formaPagamento =
+  // cadastroFormaPagamentoService.buscarOuFalhar(formasPagamentoId);
+  //    FormaPagamentoModel formaPagamentoModel =
+  // formaPagamentoModelAssembler.toModel(formaPagamento);
+  //
+  //    return ResponseEntity.ok()
+  ////            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+  ////            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePrivate())
+  //            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePublic())
+  ////            .cacheControl(CacheControl.noCache())
+  ////            .cacheControl(CacheControl.noStore())
+  //            .body(formaPagamentoModel);
+  //  }
 
   @CheckSecurity.FormasPagamento.PodeEditar
   @Override
@@ -122,7 +125,8 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
   @Override
   @PutMapping("/{formaPagamentoId}")
   public FormaPagamentoModel alterar(
-          @PathVariable Long formaPagamentoId, @RequestBody @Valid FormaPagamentoInput formaPagamentoInput) {
+      @PathVariable Long formaPagamentoId,
+      @RequestBody @Valid FormaPagamentoInput formaPagamentoInput) {
     FormaPagamento formaPagamentoAtual =
         cadastroFormaPagamentoService.buscarOuFalhar(formaPagamentoId);
 
@@ -136,7 +140,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
   @Override
   @DeleteMapping("/{formaPagamentoId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void excluir(@PathVariable Long formaPagamentoId){
-      cadastroFormaPagamentoService.excluir(formaPagamentoId);
+  public void excluir(@PathVariable Long formaPagamentoId) {
+    cadastroFormaPagamentoService.excluir(formaPagamentoId);
   }
 }

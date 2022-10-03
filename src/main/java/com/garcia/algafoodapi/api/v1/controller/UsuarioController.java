@@ -54,7 +54,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
   @Override
   @PutMapping("/{usuarioId}")
   public UsuarioModel atualizar(
-          @PathVariable Long usuarioId, @RequestBody @Valid UsuarioInput usuarioInput) {
+      @PathVariable Long usuarioId, @RequestBody @Valid UsuarioInput usuarioInput) {
 
     Usuario usuarioAtual = cadastroUsuarioService.buscarOuFalhar(usuarioId);
     usuarioInputDisassembler.copyToDomainObject(usuarioInput, usuarioAtual);
@@ -66,6 +66,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
   @PutMapping("/{usuarioId}/senha")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void alterarSenha(@PathVariable Long usuarioId, @RequestBody SenhaInput senhaInput) {
-    cadastroUsuarioService.alterarSenha(usuarioId, senhaInput.getSenhaAtual(), senhaInput.getNovaSenha());
+    cadastroUsuarioService.alterarSenha(
+        usuarioId, senhaInput.getSenhaAtual(), senhaInput.getNovaSenha());
   }
 }

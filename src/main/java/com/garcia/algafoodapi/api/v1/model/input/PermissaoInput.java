@@ -9,9 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class PermissaoInput {
 
-    @NotBlank
-    private String nome;
+  @NotBlank private String nome;
 
-    @NotBlank
-    private String descricao;
+  @NotBlank private String descricao;
 }

@@ -11,5 +11,6 @@ import javax.validation.constraints.NotBlank;
 public class UsuarioComSenhaInput extends UsuarioInput {
 
   @Schema(example = "123", type = "string")
-  @NotBlank private String senha;
+  @NotBlank
+  private String senha;
 }

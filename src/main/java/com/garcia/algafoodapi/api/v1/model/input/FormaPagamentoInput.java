@@ -11,5 +11,6 @@ import javax.validation.constraints.NotBlank;
 public class FormaPagamentoInput {
 
   @Schema(example = "Cartão de crédito")
-  @NotBlank private String descricao;
+  @NotBlank
+  private String descricao;
 }

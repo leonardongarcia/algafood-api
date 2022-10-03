@@ -13,38 +13,35 @@ import org.springframework.web.HttpMediaTypeNotAcceptableException;
 
 @Component
 public class FotoProdutoModelAssembler
-        extends RepresentationModelAssemblerSupport<FotoProduto, FotoProdutoModel> {
+    extends RepresentationModelAssemblerSupport<FotoProduto, FotoProdutoModel> {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    @Autowired
-    private AlgaLinks algaLinks;
+  @Autowired private AlgaLinks algaLinks;
 
-    @Autowired
-    private AlgaSecurity algaSecurity;
+  @Autowired private AlgaSecurity algaSecurity;
 
-    public FotoProdutoModelAssembler() {
-        super(RestauranteProdutoFotoController.class, FotoProdutoModel.class);
+  public FotoProdutoModelAssembler() {
+    super(RestauranteProdutoFotoController.class, FotoProdutoModel.class);
+  }
+
+  @Override
+  public FotoProdutoModel toModel(FotoProduto foto) {
+    FotoProdutoModel fotoProdutoModel = modelMapper.map(foto, FotoProdutoModel.class);
+
+    // Quem pode consultar restaurantes, também pode consultar os produtos e fotos
+    if (algaSecurity.podeConsultarRestaurantes()) {
+      try {
+        fotoProdutoModel.add(
+            algaLinks.linkToFotoProduto(foto.getRestauranteId(), foto.getProduto().getId()));
+      } catch (HttpMediaTypeNotAcceptableException e) {
+        e.printStackTrace();
+      }
+
+      fotoProdutoModel.add(
+          algaLinks.linkToProduto(foto.getRestauranteId(), foto.getProduto().getId(), "produto"));
     }
 
-    @Override
-    public FotoProdutoModel toModel(FotoProduto foto) {
-        FotoProdutoModel fotoProdutoModel = modelMapper.map(foto, FotoProdutoModel.class);
-
-        // Quem pode consultar restaurantes, também pode consultar os produtos e fotos
-        if (algaSecurity.podeConsultarRestaurantes()) {
-            try {
-                fotoProdutoModel.add(algaLinks.linkToFotoProduto(
-                        foto.getRestauranteId(), foto.getProduto().getId()));
-            } catch (HttpMediaTypeNotAcceptableException e) {
-                e.printStackTrace();
-            }
-
-            fotoProdutoModel.add(algaLinks.linkToProduto(
-                    foto.getRestauranteId(), foto.getProduto().getId(), "produto"));
-        }
-
-        return fotoProdutoModel;
-    }
+    return fotoProdutoModel;
+  }
 }

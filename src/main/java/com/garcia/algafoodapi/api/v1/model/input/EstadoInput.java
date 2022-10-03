@@ -11,5 +11,6 @@ import javax.validation.constraints.NotBlank;
 public class EstadoInput {
 
   @Schema(example = "Minas Gerais")
-  @NotBlank private String nome;
+  @NotBlank
+  private String nome;
 }

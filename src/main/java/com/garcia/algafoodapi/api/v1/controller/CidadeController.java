@@ -29,7 +29,7 @@ public class CidadeController implements CidadeControllerOpenApi {
 
   @Autowired private CidadeInputDisassembler cidadeInputDisassembler;
 
-//  @Deprecated
+  //  @Deprecated
   @CheckSecurity.Cidades.PodeConsultar
   @Override
   @GetMapping

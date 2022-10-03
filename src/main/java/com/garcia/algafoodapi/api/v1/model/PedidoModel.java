@@ -41,6 +41,7 @@ public class PedidoModel extends RepresentationModel<PedidoModel> {
 
   @Schema(example = "2022-12-01T20:34:04Z")
   private OffsetDateTime dataCancelamento;
+
   private RestauranteApenasNomeModel restaurante;
   private UsuarioModel cliente;
   private FormaPagamentoModel formaPagamento;

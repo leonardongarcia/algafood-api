@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/v1/pedidos/{codigoPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
-public class FluxoPedidoController
-    implements FluxoPedidoControllerOpenApi {
+public class FluxoPedidoController implements FluxoPedidoControllerOpenApi {
 
   @Autowired private FluxoPedidoService fluxoPedidoService;
 
@@ -31,7 +30,8 @@ public class FluxoPedidoController
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public ResponseEntity<Void> cancelar(@PathVariable String codigoPedido) {
     fluxoPedidoService.cancelar(codigoPedido);
-    return ResponseEntity.noContent().build();  }
+    return ResponseEntity.noContent().build();
+  }
 
   @CheckSecurity.Pedidos.PodeGerenciarPedidos
   @Override

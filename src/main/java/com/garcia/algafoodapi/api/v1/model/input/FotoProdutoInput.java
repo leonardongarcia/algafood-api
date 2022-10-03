@@ -22,5 +22,6 @@ public class FotoProdutoInput {
   private MultipartFile arquivo;
 
   @Schema(description = "Descrição da foto do produto")
-  @NotBlank private String descricao;
+  @NotBlank
+  private String descricao;
 }

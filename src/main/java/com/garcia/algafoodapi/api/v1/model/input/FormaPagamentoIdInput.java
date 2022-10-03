@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class FormaPagamentoIdInput {
 
-    @Schema(example = "1")
-    @NotNull
-    private Long id;
+  @Schema(example = "1")
+  @NotNull
+  private Long id;
 }

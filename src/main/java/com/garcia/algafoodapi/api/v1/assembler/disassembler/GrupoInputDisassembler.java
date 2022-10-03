@@ -9,14 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class GrupoInputDisassembler {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    public Grupo toDomainObject(GrupoInput grupoInput) {
-        return modelMapper.map(grupoInput, Grupo.class);
-    }
+  public Grupo toDomainObject(GrupoInput grupoInput) {
+    return modelMapper.map(grupoInput, Grupo.class);
+  }
 
-    public void copyToDomainObject(GrupoInput grupoInput, Grupo grupo) {
-        modelMapper.map(grupoInput, grupo);
-    }
+  public void copyToDomainObject(GrupoInput grupoInput, Grupo grupo) {
+    modelMapper.map(grupoInput, grupo);
+  }
 }

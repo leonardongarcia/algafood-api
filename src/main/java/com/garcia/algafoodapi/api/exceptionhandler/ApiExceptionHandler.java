@@ -39,16 +39,20 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
-  public static final String MSG_DADOS_INVALIDOS = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente!";
-  @Autowired
-  private MessageSource messageSource;
+  public static final String MSG_DADOS_INVALIDOS =
+      "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente!";
+  @Autowired private MessageSource messageSource;
 
   private static final String MSG_ERRO_GENERICA_USUARIO_FINAL =
       "Ocorreu um erro interno inesperado no sistema. Tente novamente e se o "
           + "problema persistir, entre em contato com o administrador do sistema.";
 
   @Override
-  protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+  protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(
+      HttpMediaTypeNotAcceptableException ex,
+      HttpHeaders headers,
+      HttpStatus status,
+      WebRequest request) {
     return ResponseEntity.status(status).headers(headers).build();
   }
 
@@ -76,35 +80,44 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
   }
 
   @Override
-  protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                HttpHeaders headers, HttpStatus status, WebRequest request) {
+  protected ResponseEntity<Object> handleMethodArgumentNotValid(
+      MethodArgumentNotValidException ex,
+      HttpHeaders headers,
+      HttpStatus status,
+      WebRequest request) {
 
     return handleValidationInternal(ex, headers, status, request, ex.getBindingResult());
   }
 
-  private ResponseEntity<Object> handleValidationInternal(Exception ex, HttpHeaders headers,
-                                                          HttpStatus status, WebRequest request, BindingResult bindingResult) {
+  private ResponseEntity<Object> handleValidationInternal(
+      Exception ex,
+      HttpHeaders headers,
+      HttpStatus status,
+      WebRequest request,
+      BindingResult bindingResult) {
     ProblemType problemType = ProblemType.DADOS_INVALIDOS;
-    String detail = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.";
+    String detail =
+        "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.";
 
-    List<Problem.Object> problemObjects = bindingResult.getAllErrors().stream()
-            .map(objectError -> {
-              String message = messageSource.getMessage(objectError, LocaleContextHolder.getLocale());
+    List<Problem.Object> problemObjects =
+        bindingResult.getAllErrors().stream()
+            .map(
+                objectError -> {
+                  String message =
+                      messageSource.getMessage(objectError, LocaleContextHolder.getLocale());
 
-              String name = objectError.getObjectName();
+                  String name = objectError.getObjectName();
 
-              if (objectError instanceof FieldError) {
-                name = ((FieldError) objectError).getField();
-              }
+                  if (objectError instanceof FieldError) {
+                    name = ((FieldError) objectError).getField();
+                  }
 
-              return Problem.Object.builder()
-                      .name(name)
-                      .userMessage(message)
-                      .build();
-            })
+                  return Problem.Object.builder().name(name).userMessage(message).build();
+                })
             .collect(Collectors.toList());
 
-    Problem problem = createProblemBuilder(status, problemType, detail)
+    Problem problem =
+        createProblemBuilder(status, problemType, detail)
             .userMessage(detail)
             .objects(problemObjects)
             .build();
@@ -113,41 +126,44 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
   }
 
   @Override
-  protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status,
-                                                       WebRequest request) {
+  protected ResponseEntity<Object> handleBindException(
+      BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
     return handleValidationInternal(ex, headers, status, request, ex.getBindingResult());
   }
 
-  private ResponseEntity<Object> handleValidationInternal(Exception ex, BindingResult bindingResult, HttpHeaders headers,
-                                                          HttpStatus httpStatus, WebRequest request) {
+  private ResponseEntity<Object> handleValidationInternal(
+      Exception ex,
+      BindingResult bindingResult,
+      HttpHeaders headers,
+      HttpStatus httpStatus,
+      WebRequest request) {
 
     ProblemType problemType = ProblemType.DADOS_INVALIDOS;
 
     String detail = MSG_DADOS_INVALIDOS;
-    List<Problem.Object> problemObjects = bindingResult.getAllErrors().stream()
-        .map(objectError -> {
+    List<Problem.Object> problemObjects =
+        bindingResult.getAllErrors().stream()
+            .map(
+                objectError -> {
+                  String message =
+                      messageSource.getMessage(objectError, LocaleContextHolder.getLocale());
 
-          String message = messageSource.getMessage(objectError, LocaleContextHolder.getLocale());
+                  String name = objectError.getObjectName();
 
-          String name = objectError.getObjectName();
+                  if (objectError instanceof FieldError) {
+                    name = ((FieldError) objectError).getField();
+                  }
 
-          if(objectError instanceof FieldError) {
-            name = ((FieldError) objectError).getField();
-          }
-
-          return Problem.Object.builder()
-                    .name(name)
-                    .userMessage(message)
-                    .build();
-        })
-        .collect(Collectors.toList());
+                  return Problem.Object.builder().name(name).userMessage(message).build();
+                })
+            .collect(Collectors.toList());
 
     Problem problem =
-            createProblemBuilder(httpStatus, problemType, detail)
-                    .userMessage(detail)
-                    .objects(problemObjects)
-                    .build();
+        createProblemBuilder(httpStatus, problemType, detail)
+            .userMessage(detail)
+            .objects(problemObjects)
+            .build();
     return handleExceptionInternal(ex, problem, headers, httpStatus, request);
   }
 
@@ -183,7 +199,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         String.format(
             "O parâmetro de URL '%s' recebeu o valor '%s', que é de um tipo inválido. "
                 + "Corrija e informe um valor compatível com o tipo %s!",
-            ex.getName(), ex.getValue(), Objects.requireNonNull(ex.getRequiredType()).getSimpleName());
+            ex.getName(),
+            ex.getValue(),
+            Objects.requireNonNull(ex.getRequiredType()).getSimpleName());
     Problem problem = createProblemBuilder(status, problemType, detail).userMessage(detail).build();
     return handleExceptionInternal(ex, problem, headers, status, request);
   }
@@ -232,19 +250,22 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
   }
 
   @ExceptionHandler(ValidacaoException.class)
-  public ResponseEntity<Object> handleValidacaoException(ValidacaoException ex, WebRequest request){
-    return handleValidationInternal(ex, ex.getBindingResult(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+  public ResponseEntity<Object> handleValidacaoException(
+      ValidacaoException ex, WebRequest request) {
+    return handleValidationInternal(
+        ex, ex.getBindingResult(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
   }
 
   @ExceptionHandler(AccessDeniedException.class)
   public ResponseEntity<?> handleAccessDeniedException(
-          AccessDeniedException ex, WebRequest request){
+      AccessDeniedException ex, WebRequest request) {
     HttpStatus httpStatus = HttpStatus.FORBIDDEN;
     ProblemType problemType = ProblemType.ACESSO_NEGADO;
     String detail = ex.getMessage();
 
-    Problem problem = createProblemBuilder(httpStatus, problemType, detail).userMessage(
-            "Você não possui permissão para executar essa operação!")
+    Problem problem =
+        createProblemBuilder(httpStatus, problemType, detail)
+            .userMessage("Você não possui permissão para executar essa operação!")
             .build();
 
     return handleExceptionInternal(ex, problem, new HttpHeaders(), httpStatus, request);
@@ -324,6 +345,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
   }
 
   private String joinPath(List<JsonMappingException.Reference> references) {
-    return references.stream().map(JsonMappingException.Reference::getFieldName).collect(Collectors.joining("."));
+    return references.stream()
+        .map(JsonMappingException.Reference::getFieldName)
+        .collect(Collectors.joining("."));
   }
 }

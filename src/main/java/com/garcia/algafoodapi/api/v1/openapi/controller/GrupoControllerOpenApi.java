@@ -19,57 +19,60 @@ public interface GrupoControllerOpenApi {
   @Operation(summary = "Lista os grupos")
   CollectionModel<GrupoModel> listar();
 
-  @Operation(summary = "Busca um grupo pelo ID",
-          responses = {
-                  @ApiResponse(responseCode = "200"),
-                  @ApiResponse(
-                          responseCode = "400",
-                          description = "ID do grupo inválido",
-                          content = @Content(schema = @Schema(ref = "Problema"))),
-                  @ApiResponse(
-                          responseCode = "404",
-                          description = "Grupo não encontrado",
-                          content = @Content(schema = @Schema(ref = "Problema")))
-          })
+  @Operation(
+      summary = "Busca um grupo pelo ID",
+      responses = {
+        @ApiResponse(responseCode = "200"),
+        @ApiResponse(
+            responseCode = "400",
+            description = "ID do grupo inválido",
+            content = @Content(schema = @Schema(ref = "Problema"))),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Grupo não encontrado",
+            content = @Content(schema = @Schema(ref = "Problema")))
+      })
   GrupoModel buscar(
       @Parameter(description = "ID de um grupo", example = "1", required = true) Long grupoId);
 
-  @Operation(summary = "Cadastra um grupo", responses = {
-          @ApiResponse(responseCode = "201", description = "Grupo cadastrado")
-  })
+  @Operation(
+      summary = "Cadastra um grupo",
+      responses = {@ApiResponse(responseCode = "201", description = "Grupo cadastrado")})
   GrupoModel save(
       @RequestBody(description = "Representação de um novo grupo", required = true)
           GrupoInput grupoInput);
 
-  @Operation(summary = "Atualiza um grupo",
-          responses = {
-                  @ApiResponse(responseCode = "200"),
-                  @ApiResponse(
-                          responseCode = "400",
-                          description = "ID do grupo inválido",
-                          content = @Content(schema = @Schema(ref = "Problema"))),
-                  @ApiResponse(
-                          responseCode = "404",
-                          description = "Grupo não encontrado",
-                          content = @Content(schema = @Schema(ref = "Problema")))
-          })
+  @Operation(
+      summary = "Atualiza um grupo",
+      responses = {
+        @ApiResponse(responseCode = "200"),
+        @ApiResponse(
+            responseCode = "400",
+            description = "ID do grupo inválido",
+            content = @Content(schema = @Schema(ref = "Problema"))),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Grupo não encontrado",
+            content = @Content(schema = @Schema(ref = "Problema")))
+      })
   GrupoModel atualizar(
       @Parameter(description = "ID de um grupo", example = "1", required = true) Long grupoId,
       @RequestBody(description = "Representação de um novo grupo", required = true)
           GrupoInput grupoInput);
 
-  @Operation(summary = "Exclui um grupo",
-          responses = {
-                  @ApiResponse(responseCode = "204"),
-                  @ApiResponse(
-                          responseCode = "400",
-                          description = "ID do grupo inválido",
-                          content = @Content(schema = @Schema(ref = "Problema"))),
-                  @ApiResponse(
-                          responseCode = "404",
-                          description = "Grupo não encontrado",
-                          content = @Content(schema = @Schema(ref = "Problema")))
-          })
+  @Operation(
+      summary = "Exclui um grupo",
+      responses = {
+        @ApiResponse(responseCode = "204"),
+        @ApiResponse(
+            responseCode = "400",
+            description = "ID do grupo inválido",
+            content = @Content(schema = @Schema(ref = "Problema"))),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Grupo não encontrado",
+            content = @Content(schema = @Schema(ref = "Problema")))
+      })
   void excluir(
       @Parameter(description = "ID de um grupo", example = "1", required = true) Long grupoId);
 }

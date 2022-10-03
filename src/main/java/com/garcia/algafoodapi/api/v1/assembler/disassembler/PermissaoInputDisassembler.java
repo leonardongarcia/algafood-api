@@ -9,14 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class PermissaoInputDisassembler {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    public Permissao toDomainObject(PermissaoInput permissaoInput){
-        return modelMapper.map(permissaoInput, Permissao.class);
-    }
+  public Permissao toDomainObject(PermissaoInput permissaoInput) {
+    return modelMapper.map(permissaoInput, Permissao.class);
+  }
 
-    public void toCopyDomainObject(PermissaoInput permissaoInput, Permissao permissao){
-        modelMapper.map(permissaoInput, permissao);
-    }
+  public void toCopyDomainObject(PermissaoInput permissaoInput, Permissao permissao) {
+    modelMapper.map(permissaoInput, permissao);
+  }
 }

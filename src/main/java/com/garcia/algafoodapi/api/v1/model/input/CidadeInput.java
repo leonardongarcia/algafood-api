@@ -13,7 +13,8 @@ import javax.validation.constraints.NotNull;
 public class CidadeInput {
 
   @Schema(example = "Uberlândia")
-  @NotBlank private String nome;
+  @NotBlank
+  private String nome;
 
   @Valid @NotNull private EstadoIdInput estado;
 }

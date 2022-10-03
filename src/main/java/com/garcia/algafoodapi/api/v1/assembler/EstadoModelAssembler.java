@@ -16,13 +16,11 @@ public class EstadoModelAssembler extends RepresentationModelAssemblerSupport<Es
 
   @Autowired private ModelMapper modelMapper;
 
-  @Autowired
-  private AlgaLinks algaLinks;
+  @Autowired private AlgaLinks algaLinks;
 
-  @Autowired
-  private AlgaSecurity algaSecurity;
+  @Autowired private AlgaSecurity algaSecurity;
 
-  public EstadoModelAssembler(){
+  public EstadoModelAssembler() {
     super(EstadoController.class, EstadoModel.class);
   }
 

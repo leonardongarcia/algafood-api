@@ -19,18 +19,16 @@ import java.util.List;
 @RequestMapping(path = "/v1/permissoes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PermissaoController implements PermissaoControllerOpenApi {
 
-    @Autowired
-    private PermissaoRepository permissaoRepository;
+  @Autowired private PermissaoRepository permissaoRepository;
 
-    @Autowired
-    private PermissaoModelAssembler permissaoModelAssembler;
+  @Autowired private PermissaoModelAssembler permissaoModelAssembler;
 
-    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
-    @Override
-    @GetMapping
-    public CollectionModel<PermissaoModel> listar() {
-        List<Permissao> todasPermissoes = permissaoRepository.findAll();
+  @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
+  @Override
+  @GetMapping
+  public CollectionModel<PermissaoModel> listar() {
+    List<Permissao> todasPermissoes = permissaoRepository.findAll();
 
-        return permissaoModelAssembler.toCollectionModel(todasPermissoes);
-    }
+    return permissaoModelAssembler.toCollectionModel(todasPermissoes);
+  }
 }

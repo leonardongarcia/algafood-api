@@ -11,51 +11,48 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-
 @Component
-public class UsuarioModelAssembler extends RepresentationModelAssemblerSupport<Usuario, UsuarioModel> {
+public class UsuarioModelAssembler
+    extends RepresentationModelAssemblerSupport<Usuario, UsuarioModel> {
 
-    @Autowired private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    @Autowired
-    private AlgaSecurity algaSecurity;
+  @Autowired private AlgaSecurity algaSecurity;
 
-    @Autowired
-    private AlgaLinks algaLinks;
+  @Autowired private AlgaLinks algaLinks;
 
-    public UsuarioModelAssembler(){
-        super(UsuarioController.class, UsuarioModel.class);
-    }
-    @Override
-    public UsuarioModel toModel(Usuario usuario) {
-        UsuarioModel usuarioModel = createModelWithId(usuario.getId(), usuario);
-        modelMapper.map(usuario, usuarioModel);
+  public UsuarioModelAssembler() {
+    super(UsuarioController.class, UsuarioModel.class);
+  }
 
-        if (algaSecurity.podeConsultarUsuariosGruposPermissoes()) {
-            usuarioModel.add(algaLinks.linkToUsuarios("usuarios"));
+  @Override
+  public UsuarioModel toModel(Usuario usuario) {
+    UsuarioModel usuarioModel = createModelWithId(usuario.getId(), usuario);
+    modelMapper.map(usuario, usuarioModel);
 
-            usuarioModel.add(algaLinks.linkToGruposUsuario(usuario.getId(), "grupos-usuario"));
-        }
+    if (algaSecurity.podeConsultarUsuariosGruposPermissoes()) {
+      usuarioModel.add(algaLinks.linkToUsuarios("usuarios"));
 
-        return usuarioModel;
+      usuarioModel.add(algaLinks.linkToGruposUsuario(usuario.getId(), "grupos-usuario"));
     }
 
-//    usuario
-//        .getGrupos()
-//        .add(
-//            linkTo(methodOn(UsuarioGrupoController.class).listar(usuario))
-//                .withSelfRel());
+    return usuarioModel;
+  }
 
-//        usuarioModel.add(linkTo(methodOn(UsuarioGrupoController.class).listar(usuario.getId()))
-//                .withRel("grupos-usuario"));
-//
-//        return usuarioModel;
-//    }
+  //    usuario
+  //        .getGrupos()
+  //        .add(
+  //            linkTo(methodOn(UsuarioGrupoController.class).listar(usuario))
+  //                .withSelfRel());
 
-    @Override
-    public CollectionModel<UsuarioModel> toCollectionModel(Iterable<? extends Usuario> entities) {
-        return super.toCollectionModel(entities)
-                .add(algaLinks.linkToUsuarios());
-    }
+  //        usuarioModel.add(linkTo(methodOn(UsuarioGrupoController.class).listar(usuario.getId()))
+  //                .withRel("grupos-usuario"));
+  //
+  //        return usuarioModel;
+  //    }
+
+  @Override
+  public CollectionModel<UsuarioModel> toCollectionModel(Iterable<? extends Usuario> entities) {
+    return super.toCollectionModel(entities).add(algaLinks.linkToUsuarios());
+  }
 }

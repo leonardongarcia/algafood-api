@@ -22,7 +22,9 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/v1/restaurantes/{restauranteId}/produtos", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(
+    path = "/v1/restaurantes/{restauranteId}/produtos",
+    produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestauranteProdutoController implements RestauranteProdutoControllerOpenApi {
 
   @Autowired private CadastroRestauranteService cadastroRestauranteService;
@@ -35,14 +37,14 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 
   @Autowired private ProdutoRepository produtoRepository;
 
-  @Autowired
-  private AlgaLinks algaLinks;
+  @Autowired private AlgaLinks algaLinks;
 
   @CheckSecurity.Restaurantes.PodeConsultar
   @Override
   @GetMapping
-  public CollectionModel<ProdutoModel> listar(@PathVariable Long restauranteId,
-                                              @RequestParam(required = false, defaultValue = "false") Boolean incluirInativos) {
+  public CollectionModel<ProdutoModel> listar(
+      @PathVariable Long restauranteId,
+      @RequestParam(required = false, defaultValue = "false") Boolean incluirInativos) {
     Restaurante restaurante = cadastroRestauranteService.buscarOuFalhar(restauranteId);
 
     List<Produto> todosProdutos = null;
@@ -53,8 +55,9 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
       todosProdutos = produtoRepository.findAtivosByRestaurante(restaurante);
     }
 
-    return produtoModelAssembler.toCollectionModel(todosProdutos)
-            .add(algaLinks.linkToProdutos(restauranteId));
+    return produtoModelAssembler
+        .toCollectionModel(todosProdutos)
+        .add(algaLinks.linkToProdutos(restauranteId));
   }
 
   @CheckSecurity.Restaurantes.PodeConsultar
@@ -70,7 +73,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public ProdutoModel adicionar(
-          @PathVariable Long restauranteId, @RequestBody @Valid ProdutoInput produtoInput) {
+      @PathVariable Long restauranteId, @RequestBody @Valid ProdutoInput produtoInput) {
 
     Restaurante restaurante = cadastroRestauranteService.buscarOuFalhar(restauranteId);
 
@@ -83,9 +86,9 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
   @Override
   @PutMapping("/{produtoId}")
   public ProdutoModel atualizar(
-          @PathVariable Long restauranteId,
-          @PathVariable Long produtoId,
-          @RequestBody ProdutoInput produtoInput) {
+      @PathVariable Long restauranteId,
+      @PathVariable Long produtoId,
+      @RequestBody ProdutoInput produtoInput) {
 
     Produto produto = cadastroProdutoService.buscarOuFalhar(produtoId, restauranteId);
 

@@ -13,19 +13,23 @@ import javax.validation.constraints.NotNull;
 public class EnderecoInput {
 
   @Schema(example = "38425-745")
-  @NotBlank private String cep;
+  @NotBlank
+  private String cep;
 
   @Schema(example = "Av. João Naves de Ávila")
-  @NotBlank private String logradouro;
+  @NotBlank
+  private String logradouro;
 
   @Schema(example = "125")
-  @NotBlank private String numero;
+  @NotBlank
+  private String numero;
 
   @Schema(example = "Ap. 404")
   private String complemento;
 
   @Schema(example = "Centro")
-  @NotBlank private String bairro;
+  @NotBlank
+  private String bairro;
 
   @Valid @NotNull private CidadeIdInput cidade;
 }

@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class FormaPagamentoInputDisassembler {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    public FormaPagamento toObjectModel(FormaPagamentoInput formaPagamentoInput) {
-        return modelMapper.map(formaPagamentoInput, FormaPagamento.class);
-    }
+  public FormaPagamento toObjectModel(FormaPagamentoInput formaPagamentoInput) {
+    return modelMapper.map(formaPagamentoInput, FormaPagamento.class);
+  }
 
-    public void copyToDomainObject(FormaPagamentoInput formaPagamentoInput, FormaPagamento formaPagamento) {
-        modelMapper.map(formaPagamentoInput, formaPagamento);
-    }
+  public void copyToDomainObject(
+      FormaPagamentoInput formaPagamentoInput, FormaPagamento formaPagamento) {
+    modelMapper.map(formaPagamentoInput, formaPagamento);
+  }
 }

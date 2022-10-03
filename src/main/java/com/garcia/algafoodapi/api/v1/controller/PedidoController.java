@@ -13,9 +13,9 @@ import com.garcia.algafoodapi.core.security.AlgaSecurity;
 import com.garcia.algafoodapi.core.security.CheckSecurity;
 import com.garcia.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
 import com.garcia.algafoodapi.domain.exception.NegocioException;
+import com.garcia.algafoodapi.domain.filter.PedidoFilter;
 import com.garcia.algafoodapi.domain.model.Pedido;
 import com.garcia.algafoodapi.domain.model.Usuario;
-import com.garcia.algafoodapi.domain.filter.PedidoFilter;
 import com.garcia.algafoodapi.domain.service.EmissaoPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,17 +55,15 @@ public class PedidoController implements PedidoControllerOpenApi {
 
     pedidosPage = new PageWrapper<>(pedidosPage, pageable);
 
-    return pagedResourcesAssembler.toModel(pedidosPage,
-            pedidoResumoModelAssembler);
+    return pagedResourcesAssembler.toModel(pedidosPage, pedidoResumoModelAssembler);
 
-//    List<PedidoResumoModel> pedidosResumoModel =
-//        pedidoResumoModelAssembler.toCollectionModel(pedidosPage.getContent());
-//
-//    Page<PedidoResumoModel> pedidosResumoModelPage =
-//        new PageImpl<>(pedidosResumoModel, pageable, pedidosPage.getTotalElements());
+    //    List<PedidoResumoModel> pedidosResumoModel =
+    //        pedidoResumoModelAssembler.toCollectionModel(pedidosPage.getContent());
+    //
+    //    Page<PedidoResumoModel> pedidosResumoModelPage =
+    //        new PageImpl<>(pedidosResumoModel, pageable, pedidosPage.getTotalElements());
 
-//    return pedidosResumoModelPage;
-
+    //    return pedidosResumoModelPage;
 
   }
 
@@ -98,15 +96,15 @@ public class PedidoController implements PedidoControllerOpenApi {
   private Pageable traduzirPageable(Pageable apiPageable) {
     var mapeamento =
         Map.of(
-                "codigo", "codigo",
-                "subtotal", "subtotal",
-                "taxaFrete", "taxaFrete",
-                "valorTotal", "valorTotal",
-                "dataCriacao", "dataCriacao",
-                "nomerestaurante", "restaurante.nome",
-                "restaurante.id", "restaurante.id",
-                "cliente.id", "cliente.id",
-                "cliente.nome", "cliente.nome");
+            "codigo", "codigo",
+            "subtotal", "subtotal",
+            "taxaFrete", "taxaFrete",
+            "valorTotal", "valorTotal",
+            "dataCriacao", "dataCriacao",
+            "nomerestaurante", "restaurante.nome",
+            "restaurante.id", "restaurante.id",
+            "cliente.id", "cliente.id",
+            "cliente.nome", "cliente.nome");
     return PageableTranslator.translate(apiPageable, mapeamento);
   }
 }

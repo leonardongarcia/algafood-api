@@ -11,16 +11,14 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 @Component
-public class CozinhaModelAssembler extends RepresentationModelAssemblerSupport<Cozinha, CozinhaModel> {
+public class CozinhaModelAssembler
+    extends RepresentationModelAssemblerSupport<Cozinha, CozinhaModel> {
 
   @Autowired private ModelMapper modelMapper;
   @Autowired private AlgaLinks algaLinks;
-  @Autowired
-  private AlgaSecurity algaSecurity;
+  @Autowired private AlgaSecurity algaSecurity;
 
-
-
-  public CozinhaModelAssembler(){
+  public CozinhaModelAssembler() {
     super(CozinhaController.class, CozinhaModel.class);
   }
 

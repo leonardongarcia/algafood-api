@@ -9,14 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class EstadoInputDisassembler {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    public Estado toDomainObject(EstadoInput estadoInput){
-        return modelMapper.map(estadoInput, Estado.class);
-    }
+  public Estado toDomainObject(EstadoInput estadoInput) {
+    return modelMapper.map(estadoInput, Estado.class);
+  }
 
-    public void copyToDomainObject(EstadoInput estadoInput, Estado estado){
-        modelMapper.map(estadoInput, estado);
-    }
+  public void copyToDomainObject(EstadoInput estadoInput, Estado estado) {
+    modelMapper.map(estadoInput, estado);
+  }
 }

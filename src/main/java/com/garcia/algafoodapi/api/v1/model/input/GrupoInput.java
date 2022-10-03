@@ -11,5 +11,6 @@ import javax.validation.constraints.NotBlank;
 public class GrupoInput {
 
   @Schema(example = "Gerente")
-  @NotBlank private String nome;
+  @NotBlank
+  private String nome;
 }

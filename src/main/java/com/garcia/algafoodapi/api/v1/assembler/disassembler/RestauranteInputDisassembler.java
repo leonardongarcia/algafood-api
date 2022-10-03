@@ -11,22 +11,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class RestauranteInputDisassembler {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    public Restaurante toDomainObject(RestauranteInput restauranteInput) {
-        return modelMapper.map(restauranteInput, Restaurante.class);
+  public Restaurante toDomainObject(RestauranteInput restauranteInput) {
+    return modelMapper.map(restauranteInput, Restaurante.class);
+  }
+
+  public void copyToDomainObject(RestauranteInput restauranteInput, Restaurante restaurante) {
+    // Para evitar Caused by: org.hibernate.HibernateException: identifier
+    // of an instance of com.garcia.aula11boaspraticas.domain.model.Cozinha
+    restaurante.setCozinha(new Cozinha());
+
+    if (restaurante.getEndereco() != null) {
+      restaurante.getEndereco().setCidade(new Cidade());
     }
 
-    public void copyToDomainObject(RestauranteInput restauranteInput, Restaurante restaurante) {
-        //Para evitar Caused by: org.hibernate.HibernateException: identifier
-        // of an instance of com.garcia.aula11boaspraticas.domain.model.Cozinha
-        restaurante.setCozinha(new Cozinha());
-
-        if(restaurante.getEndereco() != null) {
-            restaurante.getEndereco().setCidade(new Cidade());
-        }
-
-        modelMapper.map(restauranteInput, restaurante);
-    }
+    modelMapper.map(restauranteInput, restaurante);
+  }
 }

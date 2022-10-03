@@ -12,10 +12,13 @@ import javax.validation.constraints.PositiveOrZero;
 public class ItemPedidoInput {
 
   @Schema(example = "1")
-  @NotNull private Long produtoId;
+  @NotNull
+  private Long produtoId;
 
   @Schema(example = "2")
-  @NotNull @PositiveOrZero private Integer quantidade;
+  @NotNull
+  @PositiveOrZero
+  private Integer quantidade;
 
   @Schema(example = "Com muita cebola")
   private String observacao;
