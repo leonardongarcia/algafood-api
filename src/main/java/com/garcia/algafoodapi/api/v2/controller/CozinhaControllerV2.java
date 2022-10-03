@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-
 @RestController
 @RequestMapping(path = "/v2/cozinhas", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CozinhaControllerV2 implements com.garcia.algafoodapi.api.v2.openapi.controller.CozinhaControllerV2OpenApi {
+public class CozinhaControllerV2
+    implements com.garcia.algafoodapi.api.v2.openapi.controller.CozinhaControllerV2OpenApi {
 
   @Autowired private CadastroCozinhaService cadastroCozinhaService;
 
@@ -37,8 +37,7 @@ public class CozinhaControllerV2 implements com.garcia.algafoodapi.api.v2.openap
   public PagedModel<CozinhaModelV2> listar(@PageableDefault(size = 10) Pageable pageable) {
     Page<Cozinha> cozinhasPage = cadastroCozinhaService.listar(pageable);
 
-    return pagedResourcesAssembler.toModel(cozinhasPage,
-            cozinhaModelAssemblerV2);
+    return pagedResourcesAssembler.toModel(cozinhasPage, cozinhaModelAssemblerV2);
   }
 
   @Override
@@ -60,13 +59,12 @@ public class CozinhaControllerV2 implements com.garcia.algafoodapi.api.v2.openap
   @Transactional
   @PutMapping("/{cozinhaId}")
   public CozinhaModelV2 atualizar(
-          @PathVariable Long cozinhaId, @RequestBody @Valid CozinhaInputV2 cozinhaInputV2) {
+      @PathVariable Long cozinhaId, @RequestBody @Valid CozinhaInputV2 cozinhaInputV2) {
     Cozinha cozinhaAtual = cadastroCozinhaService.buscarOuFalhar(cozinhaId);
     cozinhaInputDisassemblerV2.copyToDomainObject(cozinhaInputV2, cozinhaAtual);
 
     return cozinhaModelAssemblerV2.toModel(cadastroCozinhaService.salvar(cozinhaAtual));
   }
-
 
   @Override
   @DeleteMapping("/{cozinhaId}")

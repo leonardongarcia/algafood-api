@@ -9,14 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class CozinhaInputDisassemblerV2 {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    public Cozinha toDomainObject(CozinhaInputV2 cozinhaInputV2) {
-        return modelMapper.map(cozinhaInputV2, Cozinha.class);
-    }
+  public Cozinha toDomainObject(CozinhaInputV2 cozinhaInputV2) {
+    return modelMapper.map(cozinhaInputV2, Cozinha.class);
+  }
 
-    public void copyToDomainObject(CozinhaInputV2 cozinhaInputV2, Cozinha cozinha) {
-        modelMapper.map(cozinhaInputV2, cozinha);
-    }
+  public void copyToDomainObject(CozinhaInputV2 cozinhaInputV2, Cozinha cozinha) {
+    modelMapper.map(cozinhaInputV2, cozinha);
+  }
 }

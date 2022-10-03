@@ -60,7 +60,7 @@ public class CidadeControllerV2 implements CidadeControllerV2OpenApi {
   @Transactional
   @PutMapping("/{cidadeId}")
   public CidadeModelV2 atualizar(
-          @PathVariable Long cidadeId, @RequestBody @Valid CidadeInputV2 cidadeInputV2) {
+      @PathVariable Long cidadeId, @RequestBody @Valid CidadeInputV2 cidadeInputV2) {
     try {
       Cidade cidadeAtual = cadastroCidadeService.buscarOuFalhar(cidadeId);
 

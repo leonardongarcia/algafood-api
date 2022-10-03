@@ -10,15 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class CidadeInputDisassemblerV2 {
 
-    @Autowired
-    private ModelMapper modelMapper;
+  @Autowired private ModelMapper modelMapper;
 
-    public Cidade toDomainObject(CidadeInputV2 cidadeInput) {
-        return modelMapper.map(cidadeInput, Cidade.class);
-    }
+  public Cidade toDomainObject(CidadeInputV2 cidadeInput) {
+    return modelMapper.map(cidadeInput, Cidade.class);
+  }
 
-    public void copyToDomainObject(CidadeInputV2 cidadeInput, Cidade cidade) {
-       cidade.setEstado(new Estado());
-       modelMapper.map(cidadeInput, cidade);
-    }
+  public void copyToDomainObject(CidadeInputV2 cidadeInput, Cidade cidade) {
+    cidade.setEstado(new Estado());
+    modelMapper.map(cidadeInput, cidade);
+  }
 }
