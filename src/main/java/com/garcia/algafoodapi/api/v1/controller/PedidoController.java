@@ -56,15 +56,6 @@ public class PedidoController implements PedidoControllerOpenApi {
     pedidosPage = new PageWrapper<>(pedidosPage, pageable);
 
     return pagedResourcesAssembler.toModel(pedidosPage, pedidoResumoModelAssembler);
-
-    //    List<PedidoResumoModel> pedidosResumoModel =
-    //        pedidoResumoModelAssembler.toCollectionModel(pedidosPage.getContent());
-    //
-    //    Page<PedidoResumoModel> pedidosResumoModelPage =
-    //        new PageImpl<>(pedidosResumoModel, pageable, pedidosPage.getTotalElements());
-
-    //    return pedidosResumoModelPage;
-
   }
 
   @CheckSecurity.Pedidos.PodeBuscar

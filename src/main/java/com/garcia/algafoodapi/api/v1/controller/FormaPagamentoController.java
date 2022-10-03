@@ -95,22 +95,6 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
         .body(formaPagamentoModel);
   }
 
-  //  @GetMapping("/{formasPagamentoId}")
-  //  public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formasPagamentoId) {
-  //    FormaPagamento formaPagamento =
-  // cadastroFormaPagamentoService.buscarOuFalhar(formasPagamentoId);
-  //    FormaPagamentoModel formaPagamentoModel =
-  // formaPagamentoModelAssembler.toModel(formaPagamento);
-  //
-  //    return ResponseEntity.ok()
-  ////            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
-  ////            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePrivate())
-  //            .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePublic())
-  ////            .cacheControl(CacheControl.noCache())
-  ////            .cacheControl(CacheControl.noStore())
-  //            .body(formaPagamentoModel);
-  //  }
-
   @CheckSecurity.FormasPagamento.PodeEditar
   @Override
   @PostMapping

@@ -40,16 +40,8 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 
   @Autowired private RestauranteApenasNomeModelAssembler restauranteApenasNomeModelAssembler;
 
-  //  @ApiOperation(value = "Lista restaurantes", response = RestauranteBasicoModelOpenApi.class)
-  //  @ApiImplicitParam(value = {
-  //          @ApiImplicitParam(value = "Nome da projeção de pedidos", allowableValues =
-  // "apenas-nome",
-  //                  name = "projecao", paramType = "query", dataTypeClass = String.class)
-  //  })
-
   @CheckSecurity.Restaurantes.PodeConsultar
   @Override
-  //  @JsonView(RestauranteView.Resumo.class)
   @GetMapping
   public CollectionModel<RestauranteBasicoModel> listar() {
     return restauranteBasicoModelAssembler.toCollectionModel(cadastroRestauranteService.listar());
@@ -57,7 +49,6 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 
   @CheckSecurity.Restaurantes.PodeConsultar
   @Override
-  //  @JsonView(RestauranteView.ApenasNome.class)
   @GetMapping(params = "projecao=apenas-nome")
   public CollectionModel<RestauranteApenasNomeModel> listarApenasNomes() {
     return restauranteApenasNomeModelAssembler.toCollectionModel(
