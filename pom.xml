@@ -16,16 +16,15 @@
     <properties>
         <java.version>17</java.version>
 
-        <!--            <modelmapper.version>2.3.0
-        </modelmapper.version>-->
-        <!--            <squiggly.version>1.3.18</squiggly.version>-->
-        <!--            <jasperreports.version>6.15.0</jasperreports.version>-->
-        <!--            <aws-java-sdk-s3.version>1.11.671</aws-java-sdk-s3.version>-->
-        <!--            <guava.version>31.0.1-jre</guava.version>-->
-        <springfox.version>3.0.0</springfox.version>
+        <modelmapper.version>3.0.0</modelmapper.version>
+        <jasperreports.version>6.19.0</jasperreports.version>
+        <aws-java-sdk-s3.version>1.12.226</aws-java-sdk-s3.version>
+        <flyway.vesrion>7.15.0</flyway.vesrion>
+        <springdoc.version>1.6.9</springdoc.version>
         <logback-ext-loggly.version>0.1.2</logback-ext-loggly.version>
         <oauth2-oidc-sdk.version>6.21.2</oauth2-oidc-sdk.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
+        <springframework.hateoas.version>1.4.2</springframework.hateoas.version>
 
     </properties>
     <dependencies>
@@ -41,7 +40,7 @@
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
-            <version>3.0.0</version>
+            <version>${modelmapper.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,12 +50,12 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.19.0</version>
+            <version>${jasperreports.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-functions</artifactId>
-            <version>6.19.0</version>
+            <version>${jasperreports.version}</version>
         </dependency>
 
         <dependency>
@@ -72,7 +71,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.12.226</version>
+            <version>${aws-java-sdk-s3.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,23 +84,23 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-hateoas</artifactId>
-            <version>1.6.9</version>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.9</version>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-security</artifactId>
-            <version>1.6.9</version>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>7.15.0</version>
+            <version>${flyway.vesrion}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -116,7 +115,7 @@
         <dependency>
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
-            <version>1.4.2</version>
+            <version>${springframework.hateoas.version}</version>
         </dependency>
 
         <dependency>
