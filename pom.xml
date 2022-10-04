@@ -19,13 +19,13 @@
         <modelmapper.version>3.0.0</modelmapper.version>
         <jasperreports.version>6.19.0</jasperreports.version>
         <aws-java-sdk-s3.version>1.12.226</aws-java-sdk-s3.version>
-        <flyway.vesrion>7.15.0</flyway.vesrion>
+        <flyway.version>7.15.0</flyway.version>
         <springdoc.version>1.6.9</springdoc.version>
         <logback-ext-loggly.version>0.1.2</logback-ext-loggly.version>
         <oauth2-oidc-sdk.version>6.21.2</oauth2-oidc-sdk.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
         <springframework.hateoas.version>1.4.2</springframework.hateoas.version>
-
+        <springauthserver.version>0.3.1</springauthserver.version>
     </properties>
     <dependencies>
 
@@ -100,7 +100,7 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>${flyway.vesrion}</version>
+            <version>${flyway.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -156,9 +156,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-authorization-server</artifactId>
+            <version>${springauthserver.version}</version>
         </dependency>
 
         <dependency>
