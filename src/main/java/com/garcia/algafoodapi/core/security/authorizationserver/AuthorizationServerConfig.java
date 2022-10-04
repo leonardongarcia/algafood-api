@@ -41,7 +41,7 @@ public class AuthorizationServerConfig {
   @Order(Ordered.HIGHEST_PRECEDENCE)
   public SecurityFilterChain authFilterChain(HttpSecurity httpSecurity) throws Exception {
     OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(httpSecurity);
-    return httpSecurity.formLogin(Customizer.withDefaults()).build();
+    return httpSecurity.formLogin(customizer -> customizer.loginPage("/login")).build();
   }
 
   @Bean
