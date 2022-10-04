@@ -96,7 +96,6 @@
             <artifactId>springdoc-openapi-security</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
