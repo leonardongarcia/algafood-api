@@ -69,11 +69,10 @@ public class PedidoController implements PedidoControllerOpenApi {
   @Override
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public PedidoModel adicionar(@RequestBody @Valid PedidoInput pedidoInput) {
+  public PedidoModel adicionar(@Valid @RequestBody PedidoInput pedidoInput) {
     try {
       Pedido novoPedido = pedidoInputDisassembler.toDomainObject(pedidoInput);
 
-      // TODO pegar usuario autenticado
       novoPedido.setCliente(new Usuario());
       novoPedido.getCliente().setId(algaSecurity.getUsuarioId());
 
