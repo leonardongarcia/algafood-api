@@ -17,7 +17,7 @@
         <java.version>17</java.version>
 
         <modelmapper.version>3.0.0</modelmapper.version>
-        <jasperreports.version>6.19.0</jasperreports.version>
+        <jasperreports.version>6.19.1</jasperreports.version>
         <aws-java-sdk-s3.version>1.12.226</aws-java-sdk-s3.version>
         <flyway.version>7.15.0</flyway.version>
         <springdoc.version>1.6.9</springdoc.version>
