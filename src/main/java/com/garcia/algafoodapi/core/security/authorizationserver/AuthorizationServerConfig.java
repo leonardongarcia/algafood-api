@@ -14,7 +14,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -43,7 +42,6 @@ public class AuthorizationServerConfig {
   @Bean
   @Order(Ordered.HIGHEST_PRECEDENCE)
   public SecurityFilterChain authFilterChain(HttpSecurity httpSecurity) throws Exception {
-    //    OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(httpSecurity);
     OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer =
         new OAuth2AuthorizationServerConfigurer();
 
@@ -51,17 +49,11 @@ public class AuthorizationServerConfig {
         customizer -> customizer.consentPage("/oauth2/consent"));
 
     RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
+
     httpSecurity
         .requestMatcher(endpointsMatcher)
-        .authorizeRequests(
-            (authorizeRequests) -> {
-              ((ExpressionUrlAuthorizationConfigurer.AuthorizedUrl) authorizeRequests.anyRequest())
-                  .authenticated();
-            })
-        .csrf(
-            (csrf) -> {
-              csrf.ignoringRequestMatchers(endpointsMatcher);
-            })
+        .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
+        .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
         .apply(authorizationServerConfigurer);
     return httpSecurity.formLogin(customizer -> customizer.loginPage("/login")).build();
   }
@@ -120,15 +112,15 @@ public class AuthorizationServerConfig {
     };
   }
 
-  @Bean
-  public OAuth2AuthorizationConsentService consentService(
-      JdbcOperations jdbcOperations, RegisteredClientRepository clientRepository) {
-    return new JdbcOAuth2AuthorizationConsentService(jdbcOperations, clientRepository);
-  }
+    @Bean
+    public OAuth2AuthorizationConsentService consentService(
+        JdbcOperations jdbcOperations, RegisteredClientRepository clientRepository) {
+      return new JdbcOAuth2AuthorizationConsentService(jdbcOperations, clientRepository);
+    }
 
   @Bean
   public OAuth2AuthorizationQueryService auth2AuthorizationQueryService(
-      JdbcOperations jdbcOperations) {
-    return new JdbcOAuth2AuthorizationQueryService(jdbcOperations);
+      JdbcOperations jdbcOperations, RegisteredClientRepository repository) {
+    return new JdbcOAuth2AuthorizationQueryService(jdbcOperations, repository);
   }
 }

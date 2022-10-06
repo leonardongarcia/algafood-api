@@ -42,7 +42,7 @@ public class AuthorizationConsentController {
 
     OAuth2AuthorizationConsent consent =
         this.consentService.findById(client.getClientId(), principal.getName());
-    String[] scopeArray = StringUtils.delimitedListToStringArray(scope, "");
+    String[] scopeArray = StringUtils.delimitedListToStringArray(scope, " ");
     Set<String> scopeParaAprovar = new HashSet<>(Set.of(scopeArray));
 
     Set<String> scopesAprovadosAnteriormente;
