@@ -47,7 +47,7 @@ public class ResourceServerConfig {
           List<String> authorities = jwt.getClaimAsStringList("authorities");
 
           if (authorities == null) {
-            return Collections.emptySet();
+            return Collections.emptyList();
           }
 
           JwtGrantedAuthoritiesConverter authoritiesConverter =
