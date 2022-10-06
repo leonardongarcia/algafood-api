@@ -27,21 +27,21 @@ public class EstadoController implements EstadoControllerOpenApi {
 
   @Autowired private EstadoModelAssembler estadoModelAssembler;
 
-  @CheckSecurity.Cidades.PodeConsultar
+  @CheckSecurity.Estados.PodeConsultar
   @Override
   @GetMapping
   public CollectionModel<EstadoModel> listar() {
     return estadoModelAssembler.toCollectionModel(cadastroEstadoService.listar());
   }
 
-  @CheckSecurity.Cidades.PodeConsultar
+  @CheckSecurity.Estados.PodeConsultar
   @Override
   @GetMapping("/{estadoId}")
   public EstadoModel buscar(@PathVariable Long estadoId) {
     return estadoModelAssembler.toModel(cadastroEstadoService.buscarOuFalhar(estadoId));
   }
 
-  @CheckSecurity.Cidades.PodeEditar
+  @CheckSecurity.Estados.PodeEditar
   @Override
   @Transactional
   @PostMapping
@@ -51,7 +51,7 @@ public class EstadoController implements EstadoControllerOpenApi {
     return estadoModelAssembler.toModel(cadastroEstadoService.salvar(estado));
   }
 
-  @CheckSecurity.Cidades.PodeEditar
+  @CheckSecurity.Estados.PodeEditar
   @Override
   @Transactional
   @PutMapping("/{estadoId}")
@@ -64,7 +64,7 @@ public class EstadoController implements EstadoControllerOpenApi {
     return estadoModelAssembler.toModel(cadastroEstadoService.salvar(estadoAtual));
   }
 
-  @CheckSecurity.Cidades.PodeEditar
+  @CheckSecurity.Estados.PodeEditar
   @Override
   @Transactional
   @DeleteMapping("/{estadoId}")
