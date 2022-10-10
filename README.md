@@ -36,3 +36,18 @@ Esta API é uma aplicação backend desenvolvida durante o curso "Especialista S
 * Versionamento de APIs
 * Dockerização da aplicação
 * Deploy em produção na nuvem da Amazon
+
+
+# Créditos
+
+Especial agradecimento ao grande professor Thiago pela grande competência e didática e também a toda AlgaWorks juntamente com os tutores pela grande presteza na resolução de dúvidas e escalrecimentos adicionais.
+
+* AlgaWorks - https://www.algaworks.com/
+* Thiago Faria - linkedin.com/in/thiagofa
+
+# Autor
+
+Leonardo do Nascimento Garcia
+
+
+linkedin.com/in/leonardo-n-garcia
