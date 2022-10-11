@@ -1,5 +1,6 @@
 # Algafood Api
 API de delivery de comida
+* Documentação: http://algafood-lb-1853601454.us-east-1.elb.amazonaws.com/swagger-ui/4.11.1/index.html#/
 
 ## Segurança da aplicação
 
@@ -37,7 +38,7 @@ Por fim o cadastrador tem apenas a permissão 7.
 
 A API está disponível na nuvem da [AWS Amazon](https://aws.amazon.com/pt/?nc2=h_lg) pelo link abaixo:
 
-* Link Documentação: http://algafood-lb-1853601454.us-east-1.elb.amazonaws.com/swagger-ui/4.11.1/index.html#/
+* Documentação: http://algafood-lb-1853601454.us-east-1.elb.amazonaws.com/swagger-ui/4.11.1/index.html#/
 
 E abaixo o email e senha de 4 usuários para testar os endpoints:
 
