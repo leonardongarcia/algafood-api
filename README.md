@@ -16,16 +16,16 @@ Cada usuário tem as permissões de acordo com o grupo em que está inserido, qu
 
 E temos as seguintes permissões:
 
-1	Permite editar cozinhas
-2	Permite criar ou editar formas de pagamento
-3	Permite criar ou editar cidades
-4	Permite criar ou editar estados
-5	Permite consultar usuários, grupos e permissões
-6	Permite criar ou editar usuários, grupos e permissões
-7	Permite criar, editar ou gerenciar restaurantes
-8	Permite consultar pedidos
-9	Permite gerenciar pedidos
-10	Permite gerar relatórios
+* 1	Permite editar cozinhas
+* 2	Permite criar ou editar formas de pagamento
+* 3	Permite criar ou editar cidades
+* 4	Permite criar ou editar estados
+* 5	Permite consultar usuários, grupos e permissões
+* 6	Permite criar ou editar usuários, grupos e permissões
+* 7	Permite criar, editar ou gerenciar restaurantes
+* 8	Permite consultar pedidos
+* 9	Permite gerenciar pedidos
+* 10	Permite gerar relatórios
 
 O usuário que está no grupo de Gerente possui todas as permissões.
 
