@@ -1,8 +1,58 @@
 # Algafood Api
 API de delivery de comida
 
+## Segurança da aplicação
+
+Todos os endepoinst estão protegidos pelo [Spring Security OAuth2](https://spring.io/projects/spring-security).
+
+Os Tokens JWT são emitidos e gerenciados pelo novo projeto [Spring Authorization server](https://spring.io/projects/spring-authorization-server).
+
+Cada usuário tem as permissões de acordo com o grupo em que está inserido, quais sejam:
+
+* Gerente
+* Vendedor
+* Secretária
+* Cadastrador
+
+E temos as seguintes permissões:
+
+1	Permite editar cozinhas
+2	Permite criar ou editar formas de pagamento
+3	Permite criar ou editar cidades
+4	Permite criar ou editar estados
+5	Permite consultar usuários, grupos e permissões
+6	Permite criar ou editar usuários, grupos e permissões
+7	Permite criar, editar ou gerenciar restaurantes
+8	Permite consultar pedidos
+9	Permite gerenciar pedidos
+10	Permite gerar relatórios
+
+O usuário que está no grupo de Gerente possui todas as permissões.
+
+Já o usuário Vendedor ou a Secretária possui apenas as permissões 5 e 8.
+
+Por fim o cadastrador tem apenas a permissão 7.
+
+## Como acessar e testar
+
+A API está disponível na nuvem da [AWS Amazon](https://aws.amazon.com/pt/?nc2=h_lg) pelo link abaixo:
 
 * Link Documentação: http://algafood-lb-1853601454.us-east-1.elb.amazonaws.com/swagger-ui/4.11.1/index.html#/
+
+E abaixo o email e senha de 4 usuários para testar os endpoints:
+
+A senha é 123 para todos os emails.
+
+* Gerente joao.ger@algafood.com.br
+
+* Vendedor maria.vnd@algafood.com.br
+
+
+* Secretária jose.aux@algafood.com.br
+
+
+* Cadastrador sebastiao.cad@algafood.com.br
+
 
 ## Descrição do projeto
 
