@@ -2,7 +2,17 @@
 
 API de delivery de comida
 
-* Documentação: http://algafood-lb-1853601454.us-east-1.elb.amazonaws.com/swagger-ui/4.11.1/index.html#/
+Para testar o projeto, siga os passos abaixo:
+
+* Faça o clone do projeto para a sua máquina.
+
+* Certifique-se de ter o Docker e o Docker-compose instalados localmente.
+
+* Dentro do projeto clonado, rode o camando ``` docker-compose up  ```.
+
+* O projeto estará por padrão na porta 80 do localhost.
+
+* Basta acessar o link da documentação: http://localhost/swagger-ui/index.html#
 
 
 ## 1 - Descrição
